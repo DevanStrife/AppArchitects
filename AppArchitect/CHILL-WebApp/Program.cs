@@ -2,6 +2,7 @@ using CHILL_WebApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using CHILL_WebApp.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

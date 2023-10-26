@@ -9,8 +9,6 @@ namespace CHILL_WebApp.Models
         public string? Name { get; set; }
         public string? Password { get; set; }
 
-        public Photo? Photos { get; set; }
-        public int? PhotoId { get; set; }
-
+        public virtual ICollection<Photo>? Photos { get; set; }
     }
 }
