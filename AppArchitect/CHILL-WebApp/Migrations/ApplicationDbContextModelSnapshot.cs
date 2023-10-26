@@ -36,12 +36,7 @@ namespace CHILL_WebApp.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PhotoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PhotoId");
 
                     b.ToTable("Experts");
                 });
@@ -123,13 +118,19 @@ namespace CHILL_WebApp.Migrations
                     b.ToTable("Photo_Coordinates");
                 });
 
-            modelBuilder.Entity("CHILL_WebApp.Models.Expert", b =>
+            modelBuilder.Entity("ExpertPhoto", b =>
                 {
-                    b.HasOne("CHILL_WebApp.Models.Photo", "Photos")
-                        .WithMany("Experts")
-                        .HasForeignKey("PhotoId");
+                    b.Property<int>("ExpertsId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Photos");
+                    b.Property<int>("PhotosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ExpertsId", "PhotosId");
+
+                    b.HasIndex("PhotosId");
+
+                    b.ToTable("ExpertPhoto");
                 });
 
             modelBuilder.Entity("CHILL_WebApp.Models.Label", b =>
@@ -152,6 +153,21 @@ namespace CHILL_WebApp.Migrations
                     b.Navigation("Label");
                 });
 
+            modelBuilder.Entity("ExpertPhoto", b =>
+                {
+                    b.HasOne("CHILL_WebApp.Models.Expert", null)
+                        .WithMany()
+                        .HasForeignKey("ExpertsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CHILL_WebApp.Models.Photo", null)
+                        .WithMany()
+                        .HasForeignKey("PhotosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CHILL_WebApp.Models.Label", b =>
                 {
                     b.Navigation("Coordinates");
@@ -159,8 +175,6 @@ namespace CHILL_WebApp.Migrations
 
             modelBuilder.Entity("CHILL_WebApp.Models.Photo", b =>
                 {
-                    b.Navigation("Experts");
-
                     b.Navigation("Labels");
                 });
 #pragma warning restore 612, 618
