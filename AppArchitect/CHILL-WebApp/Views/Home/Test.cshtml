@@ -5,12 +5,14 @@
 }
 <html>
 <head>
+    <link rel="stylesheet" href="site.css" />
     <title>Image Area Selection</title>
 </head>
 <body>
     <div id="image-container">
         <img src="~/img/trash35_jpg.rf.9720d94edcf0c766c279bf6d0e5e40fe.jpg" id="selected-image" draggable="false"/>
         <div id="selection-rectangle"></div>
+        <div id="visible-rectangle"></div> <!-- Rectangle to be drawn on top -->
     </div>
     <div id="coordinates">
         <p>Top-Left: <span id="top-left"></span></p>

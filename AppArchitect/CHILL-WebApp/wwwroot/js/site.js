@@ -1,50 +1,78 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-$(document).ready(function () {
+﻿$(document).ready(function () {
     let isDragging = false;
-    let startX, startY;
     const $selectionRectangle = $("#selection-rectangle");
     const $image = $("#selected-image");
+    const $visibleRectangle = $("#visible-rectangle");
     const $coordinates = $("#coordinates");
+    const $htmlBody = $("html, body");
 
-    $image.on("mousedown", function (e) {
+    let originalContainerHeight;
+
+    $(document).on("mousedown", function (e) {
         isDragging = true;
-        startX = e.clientX - $image.offset().left;
-        startY = e.clientY - $image.offset().top;
+        const left = Math.max(0, Math.min($image.width(), e.clientX - $image.offset().left));
+        const top = Math.max(0, Math.min($image.height(), e.clientY - $image.offset().top));
 
         $selectionRectangle.css({
-            left: startX,
-            top: startY,
+            left,
+            top,
             width: 0,
             height: 0,
         });
+
+        $visibleRectangle.css({
+            left,
+            top,
+        });
+
+        $htmlBody.css("overflow", "hidden");
+        originalContainerHeight = $image.parent().height();
     });
 
     $(document).on("mousemove", function (e) {
         if (isDragging) {
-            const width = e.clientX - $image.offset().left - startX;
-            const height = e.clientY - $image.offset().top - startY;
+            const left = Math.max(0, Math.min($image.width(), e.clientX - $image.offset().left));
+            const top = Math.max(0, Math.min($image.height(), e.clientY - $image.offset().top));
+            const width = left - parseFloat($selectionRectangle.css('left'));
+            const height = top - parseFloat($selectionRectangle.css('top'));
 
             $selectionRectangle.css({
-                width,
-                height,
+                width: Math.min($image.width() - parseFloat($selectionRectangle.css('left')), width),
+                height: Math.min($image.height() - parseFloat($selectionRectangle.css('top')), height),
             });
+
+            $visibleRectangle.css({
+                width: Math.min($image.width() - parseFloat($selectionRectangle.css('left')), width),
+                height: Math.min($image.height() - parseFloat($selectionRectangle.css('top')), height),
+            });
+
+            return false;
         }
     });
 
     $(document).on("mouseup", function () {
         isDragging = false;
         updateCoordinates();
+
+        $htmlBody.css("overflow", "auto");
+        $image.parent().css("height", originalContainerHeight);
+
+        // Hide the selection rectangle
+        $selectionRectangle.css({
+            width: 0,
+            height: 0,
+        });
+        $visibleRectangle.css({
+            width: 0,
+            height: 0,
+        });
     });
 
     function updateCoordinates() {
-        const imageOffset = $image.offset();
-        const left = startX;
-        const top = startY;
-        const right = startX + $selectionRectangle.width();
-        const bottom = startY + $selectionRectangle.height();
+        const left = parseFloat($selectionRectangle.css('left'));
+        const top = parseFloat($selectionRectangle.css('top'));
+        const right = left + parseFloat($selectionRectangle.css('width'));
+        const bottom = top + parseFloat($selectionRectangle.css('height'));
 
         $("#top-left").text(`(${left}, ${top})`);
         $("#top-right").text(`(${right}, ${top})`);
