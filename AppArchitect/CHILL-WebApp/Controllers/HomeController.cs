@@ -28,5 +28,10 @@ namespace CHILL_WebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        // Testing ground for new features
+        public IActionResult Test()
+        {
+            return View();
+        }
     }
 }
