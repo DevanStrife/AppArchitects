@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* <div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+ *@
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/css/Login.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Shared.css"><!-- Adjust the path to your CSS file as needed -->
+</head>
+<body>
+    <div id="login-container">
+        <h1>CHILL Applicatie</h1>
+        <form id="login-form">
+            <div class="input-box">
+                <input type="text" placeholder="Username" required />
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password" required />
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+        <input type="submit" value="Log in">
+    </form>
+    </div>
+</body>
+</html>

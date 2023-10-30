@@ -10,16 +10,23 @@
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Swiper</a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Overzicht</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="complete-header">
+            <nav>
+                <partial name="_LoginPartial" />
+                <ul>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Swiper</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Overzicht</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Labels">Labels</a>
+                    </li>
+                </ul>
+             </nav>
+            <button class="logout-button">Logout</button>
+        </div>
     </header>
     <div>
         <main>
