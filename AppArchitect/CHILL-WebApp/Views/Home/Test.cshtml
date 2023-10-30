@@ -9,7 +9,7 @@
     <title>Image Area Selection</title>
 </head>
 <body>
-    <div id="image-container">
+    @* <div id="image-container">
         <img src="~/img/trash35_jpg.rf.9720d94edcf0c766c279bf6d0e5e40fe.jpg" id="selected-image" draggable="false"/>
         <div id="selection-rectangle"></div>
         <div id="visible-rectangle"></div> <!-- Rectangle to be drawn on top -->
@@ -20,6 +20,13 @@
         <p>Bottom-Left: <span id="bottom-left"></span></p>
         <p>Bottom-Right: <span id="bottom-right"></span></p>
     </div>
-    <script src="site.js"></script>
+    <script src="site.js"></script> *@
+
+    <img src="~/img/trash35_jpg.rf.9720d94edcf0c766c279bf6d0e5e40fe.jpg" id="img" />
+    <div id="canvas-container">
+        <canvas id="c1" height="500" width="500"></canvas>
+        <canvas id="c2" height="500" width="500"></canvas>
+    </div>
+    <script src="~/js/ImageHandler.js"></script>
 </body>
 </html>
