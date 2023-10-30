@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<html>
+<head>
+    <link rel="stylesheet" href="site.css" />
+    <title>Image Area Selection</title>
+</head>
+<body>
+    <img src="~/img/trash35_jpg.rf.9720d94edcf0c766c279bf6d0e5e40fe.jpg" id="img" /> <!-- Image that we want to draw on and get coordinates -->
+    <div id="canvas-container">
+        <canvas id="myCanvas" width="400" height="400" style="border: 1px solid #000;"></canvas>
+    </div>
+    <div id="coordinates" style="margin-top: 10px; float: right;"></div>
+    <script src="~/js/ImageHandler.js"></script>
+    <div id="displayCoordinates" style="float: right;">
+        <p>Top-Left: <span id="top-left"></span></p>
+        <p>Bottom-Right: <span id="bottom-right"></span></p>
+    </div>
+
+</body>
+</html>

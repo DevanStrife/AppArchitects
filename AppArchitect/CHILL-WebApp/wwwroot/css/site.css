@@ -41,3 +41,30 @@ a {
 footer {
     margin-top: auto;
 }
+/*#visible-rectangle {
+    position: absolute;
+    border: 2px dashed red;*/ /* Change the border style and color as desired */
+    /*pointer-events: none;*/ /* Make it non-interactive */
+/*}*/
+
+#img {
+    display: none;
+}
+
+#canvas-container {
+    position: relative;
+}
+
+canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#c1 {
+    z-index: 0;
+}
+
+#c2 {
+    z-index: 1;
+}
