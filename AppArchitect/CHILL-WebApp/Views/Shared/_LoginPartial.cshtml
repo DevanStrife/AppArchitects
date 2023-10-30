@@ -1,10 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/LoginPartial.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared.css" asp-append-version="true" />
 
 
-<ul class="login">
+
+<ul class="login right">
 @if (SignInManager.IsSignedIn(User))
 {
     <li>

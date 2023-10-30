@@ -1,4 +1,4 @@
-﻿using CHILL_WebApp.Models;
+using CHILL_WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -27,6 +27,15 @@ namespace CHILL_WebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult Labels()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
         }
         // Testing ground for new features
         public IActionResult Test()
