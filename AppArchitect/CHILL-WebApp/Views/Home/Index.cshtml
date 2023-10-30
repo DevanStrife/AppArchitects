@@ -11,12 +11,16 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" type="text/css" href="~/css/Swiper.css"> <!-- Adjust the path to your CSS file as needed -->
+    <link rel="stylesheet" type="text/css" href="~/css/Swiper.css">
 </head>
 <body>
     <div class="display-grid">
         <div class="image-display column">
-            <img src="https://picsum.photos/640/640">
+            <div id="canvas-container">
+                <img src="~/img/trash35_jpg.rf.9720d94edcf0c766c279bf6d0e5e40fe.jpg" id="img" style="max-width: 100%;" /> <!-- Image that we want to draw on and get coordinates -->
+                <canvas id="myCanvas" width="600" height="600" ></canvas>
+                <script src="~/js/ImageHandler.js"></script>
+            </div>
         </div>
         <div class="label-column column">
             <div class="column-button-wrapper">
