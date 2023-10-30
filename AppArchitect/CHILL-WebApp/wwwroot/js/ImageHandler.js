@@ -64,10 +64,10 @@ function getRectangleCoordinates() {
     const roundedBottomLeft = { x: bottomLeft.x.toFixed(2), y: bottomLeft.y.toFixed(2) };
     const roundedBottomRight = { x: bottomRight.x.toFixed(2), y: bottomRight.y.toFixed(2) };
 /* Print to page */
-    coordinatesDiv.innerHTML = `
+    /*coordinatesDiv.innerHTML = `
                 Top Left: (${roundedTopLeft.x}, ${roundedTopLeft.y})<br>
                 Top Right: (${roundedTopRight.x}, ${roundedTopRight.y})<br>
                 Bottom Left: (${roundedBottomLeft.x}, ${roundedBottomLeft.y})<br>
                 Bottom Right: (${roundedBottomRight.x}, ${roundedBottomRight.y})
-            `;
+            `;*/
 }

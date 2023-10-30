@@ -88,3 +88,12 @@ input[type=submit] {
     height: 5vh;
 }
 
+#canvas-container {
+    position: relative;
+}
+
+#myCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
