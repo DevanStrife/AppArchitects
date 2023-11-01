@@ -11,6 +11,6 @@ namespace CHILL_WebApp.Models
 
         public Photo? Photos { get; set; }
         public int? PhotoId {get; set; }
-        public virtual Photo_Coordinates? Coordinates { get; set; }
+        public virtual Expert? Experts { get; set; }
     }
 }

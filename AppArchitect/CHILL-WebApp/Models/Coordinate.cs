@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CHILL_WebApp.Models
 {
-    public class Photo_Coordinates
+    public class Coordinate
     {
-        [ForeignKey("Label")]
+        [ForeignKey("Photo")]
         [Key]
         public int Id { get; set; }
         [Required]
@@ -26,6 +26,6 @@ namespace CHILL_WebApp.Models
         [Required]
         public float Y4 { get; set; }
 
-        public virtual Label? Label { get; set; }
+        public virtual Photo? Photos { get; set; }
     }
 }

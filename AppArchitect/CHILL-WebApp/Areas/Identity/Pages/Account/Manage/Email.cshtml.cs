@@ -18,13 +18,13 @@ namespace CHILL_WebApp.Areas.Identity.Pages.Account.Manage
 {
     public class EmailModel : PageModel
     {
-        private readonly UserManager<CHILL_User> _userManager;
-        private readonly SignInManager<CHILL_User> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<CHILL_User> userManager,
-            SignInManager<CHILL_User> signInManager,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -74,7 +74,7 @@ namespace CHILL_WebApp.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(CHILL_User user)
+        private async Task LoadAsync(IdentityUser user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;
