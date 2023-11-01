@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CHILL_WebApp.Areas.Identity.Data;
 
-public class IdentityDbContext : IdentityDbContext<CHILL_User>
+public class IdentityDbContext : IdentityDbContext<IdentityUser>
 {
     public IdentityDbContext()
     {
@@ -24,8 +24,7 @@ public class IdentityDbContext : IdentityDbContext<CHILL_User>
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=DS-Asus-Laptop\\SQLEXPRESS;Database=AppArchitectDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=EventPlannerV2;Trusted_Connection=True;MultipleActiveResultSets=true");
         base.OnConfiguring(optionsBuilder);
     }
-
 }
