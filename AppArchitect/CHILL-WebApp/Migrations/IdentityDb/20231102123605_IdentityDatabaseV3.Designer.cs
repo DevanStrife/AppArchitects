@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CHILL_WebApp.Migrations.IdentityDb
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20231101105122_identityFix")]
-    partial class identityFix
+    [Migration("20231102123605_IdentityDatabaseV3")]
+    partial class IdentityDatabaseV3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
