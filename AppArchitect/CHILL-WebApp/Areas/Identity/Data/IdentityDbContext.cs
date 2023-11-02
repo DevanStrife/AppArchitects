@@ -24,7 +24,7 @@ public class IdentityDbContext : IdentityDbContext<IdentityUser>
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=EventPlannerV2;Trusted_Connection=True;MultipleActiveResultSets=true");
+        optionsBuilder.UseSqlServer("Server=.;Database=AppArchitectDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
         base.OnConfiguring(optionsBuilder);
     }
 }
