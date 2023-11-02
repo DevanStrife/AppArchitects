@@ -7,10 +7,10 @@ namespace CHILL_WebApp.Models
     {
         [Key]
         public int Id { get; set; }
-        public byte[]? Bytes { get; set; }
+        [Required]
+        public string Path { get; set; }
         public bool IsLabeled { get; set; }
-        public virtual ICollection<Label>? Labels { get; set; }
-        public virtual ICollection<Coordinate>? Coordinates { get; set; }
-        public virtual ICollection<Expert>? Experts { get; set; }
+        public ICollection<Coordinate>? Coordinates { get; set; }
+        public ICollection<Expert>? Experts { get; set; }
     }
 }

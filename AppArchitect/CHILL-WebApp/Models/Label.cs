@@ -8,9 +8,6 @@ namespace CHILL_WebApp.Models
         public int Id { get; set; }
         public string? Description { get; set; }
         public string? Colour { get; set; }
-
-        public Photo? Photos { get; set; }
-        public int? PhotoId {get; set; }
-        public virtual Expert? Experts { get; set; }
+        public Expert? Experts { get; set; }
     }
 }

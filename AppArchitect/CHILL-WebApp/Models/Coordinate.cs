@@ -6,7 +6,6 @@ namespace CHILL_WebApp.Models
 {
     public class Coordinate
     {
-        [ForeignKey("Photo")]
         [Key]
         public int Id { get; set; }
         [Required]
@@ -26,6 +25,7 @@ namespace CHILL_WebApp.Models
         [Required]
         public float Y4 { get; set; }
 
-        public virtual Photo? Photos { get; set; }
+        public  Photo? Photos { get; set; }
+        public int PhotoId { get; set; }
     }
 }
