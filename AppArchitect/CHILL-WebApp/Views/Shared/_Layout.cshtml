@@ -1,3 +1,6 @@
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,18 +16,30 @@
         <div class="complete-header">
             <nav>
                 <partial name="_LoginPartial" />
-                <ul>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Swiper</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Overzicht</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Labels" asp-action="Index">Labels</a>
-                    </li>
-                </ul>
-             </nav>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-controller="Photos" asp-action="Index">Photos</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Privacy">Overzicht</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Labels" asp-action="Index">Labels</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Photos" asp-action="Create">Add Photo</a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul>
+                        ACCESS DENIED
+                    </ul>
+                }
+            </nav>
             <button class="logout-button">Logout</button>
         </div>
     </header>
