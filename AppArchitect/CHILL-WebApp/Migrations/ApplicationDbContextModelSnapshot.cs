@@ -17,10 +17,52 @@ namespace CHILL_WebApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CHILL_WebApp.Models.Coordinate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PhotoId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("X1")
+                        .HasColumnType("real");
+
+                    b.Property<float>("X2")
+                        .HasColumnType("real");
+
+                    b.Property<float>("X3")
+                        .HasColumnType("real");
+
+                    b.Property<float>("X4")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Y1")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Y2")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Y3")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Y4")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PhotoId");
+
+                    b.ToTable("Coordinate");
+                });
 
             modelBuilder.Entity("CHILL_WebApp.Models.Expert", b =>
                 {
@@ -55,12 +97,12 @@ namespace CHILL_WebApp.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PhotoId")
+                    b.Property<int?>("ExpertsId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PhotoId");
+                    b.HasIndex("ExpertsId");
 
                     b.ToTable("Labels");
                 });
@@ -77,45 +119,12 @@ namespace CHILL_WebApp.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Path")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Photos");
-                });
-
-            modelBuilder.Entity("CHILL_WebApp.Models.Photo_Coordinates", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<float>("X1")
-                        .HasColumnType("real");
-
-                    b.Property<float>("X2")
-                        .HasColumnType("real");
-
-                    b.Property<float>("X3")
-                        .HasColumnType("real");
-
-                    b.Property<float>("X4")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Y1")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Y2")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Y3")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Y4")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Photo_Coordinates");
                 });
 
             modelBuilder.Entity("ExpertPhoto", b =>
@@ -133,24 +142,24 @@ namespace CHILL_WebApp.Migrations
                     b.ToTable("ExpertPhoto");
                 });
 
-            modelBuilder.Entity("CHILL_WebApp.Models.Label", b =>
+            modelBuilder.Entity("CHILL_WebApp.Models.Coordinate", b =>
                 {
                     b.HasOne("CHILL_WebApp.Models.Photo", "Photos")
-                        .WithMany("Labels")
-                        .HasForeignKey("PhotoId");
+                        .WithMany("Coordinates")
+                        .HasForeignKey("PhotoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Photos");
                 });
 
-            modelBuilder.Entity("CHILL_WebApp.Models.Photo_Coordinates", b =>
+            modelBuilder.Entity("CHILL_WebApp.Models.Label", b =>
                 {
-                    b.HasOne("CHILL_WebApp.Models.Label", "Label")
-                        .WithOne("Coordinates")
-                        .HasForeignKey("CHILL_WebApp.Models.Photo_Coordinates", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("CHILL_WebApp.Models.Expert", "Experts")
+                        .WithMany()
+                        .HasForeignKey("ExpertsId");
 
-                    b.Navigation("Label");
+                    b.Navigation("Experts");
                 });
 
             modelBuilder.Entity("ExpertPhoto", b =>
@@ -168,14 +177,9 @@ namespace CHILL_WebApp.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CHILL_WebApp.Models.Label", b =>
-                {
-                    b.Navigation("Coordinates");
-                });
-
             modelBuilder.Entity("CHILL_WebApp.Models.Photo", b =>
                 {
-                    b.Navigation("Labels");
+                    b.Navigation("Coordinates");
                 });
 #pragma warning restore 612, 618
         }
