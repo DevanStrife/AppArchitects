@@ -57,9 +57,11 @@
         <div class="label-column column">
             <div class="column-button-wrapper">
                 <div class="all-labels">
-                    <button class="column-button">Fiets</button>
-                    <button class="column-button">Metaal</button>
-                    <button class="column-button">Plastic Fles</button>
+                    <p> LIST OF LABELS HERE</p>
+                    @foreach (var label in (List<Label>)ViewData["Labels"])
+                    {
+                        <button class="column-button">@label.Description</button>
+                    }
                 </div>
                 <form class="label-form" method="post" action="/Photos/LabelImage">
                         <input type="text" placeholder="Welk label wilt u toevoegen?">
