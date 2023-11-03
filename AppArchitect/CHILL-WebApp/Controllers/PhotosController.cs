@@ -183,5 +183,51 @@ namespace CHILL_WebApp.Controllers
         {
           return (_context.Photos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        [HttpPost]
+        public IActionResult LabelImage(int imageId, int labelId, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+        {
+            // Get the expert (you need to implement authentication)
+            Expert expert = _context.Experts.FirstOrDefault(/* Find the expert based on user identity */);
+
+            // Find the photo
+            var photo = _context.Photos.FirstOrDefault(i => i.Id == imageId);
+            if (photo != null)
+            {
+                // Update the IsLabeled field
+                photo.IsLabeled = true;
+
+                // Create a new Coordinate record
+                Coordinate coordinate = new Coordinate
+                {
+                    X1 = x1,
+                    Y1 = y2,
+                    X2 = x2,
+                    Y2 = y2,
+                    X3 = x3,
+                    Y3 = y3,
+                    X4 = x4,
+                    Y4 = y4,
+                    Photos = photo
+                };
+
+                // Find the selected label
+                Label label = _context.Labels.FirstOrDefault(l => l.Id == labelId);
+
+                if (label != null)
+                {
+                    // Associate the label and expert with the photo
+                    photo.Label = label; // !!! DB connections are fucked
+                    photo.Experts.Add(expert);
+
+                    _context.SaveChanges();
+                }
+            }
+
+            // Find the next unlabeled image to load
+            var nextUnlabeledImage = _context.Photos.FirstOrDefault(i => !i.IsLabeled);
+
+            return View("Index", nextUnlabeledImage);
+        }
     }
 }

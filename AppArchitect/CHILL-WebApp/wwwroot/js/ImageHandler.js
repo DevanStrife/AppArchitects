@@ -63,11 +63,14 @@ function getRectangleCoordinates() {
     const roundedTopRight = { x: topRight.x.toFixed(2), y: topRight.y.toFixed(2) };
     const roundedBottomLeft = { x: bottomLeft.x.toFixed(2), y: bottomLeft.y.toFixed(2) };
     const roundedBottomRight = { x: bottomRight.x.toFixed(2), y: bottomRight.y.toFixed(2) };
-/* Print to page */
-    /*coordinatesDiv.innerHTML = `
-                Top Left: (${roundedTopLeft.x}, ${roundedTopLeft.y})<br>
-                Top Right: (${roundedTopRight.x}, ${roundedTopRight.y})<br>
-                Bottom Left: (${roundedBottomLeft.x}, ${roundedBottomLeft.y})<br>
-                Bottom Right: (${roundedBottomRight.x}, ${roundedBottomRight.y})
-            `;*/
+/* store on page */
+    document.getElementById("x1").value = roundedTopLeft.x;
+    document.getElementById("y1").value = roundedTopLeft.y;
+    document.getElementById("x2").value = roundedTopRight.x;
+    document.getElementById("y2").value = roundedTopRight.y;
+    document.getElementById("x3").value = roundedBottomLeft.x;
+    document.getElementById("y3").value = roundedBottomLeft.y;
+    document.getElementById("x4").value = roundedBottomRight.x;
+    document.getElementById("y4").value = roundedBottomRight.y;
+
 }
