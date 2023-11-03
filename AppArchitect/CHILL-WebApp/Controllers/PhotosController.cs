@@ -27,6 +27,9 @@ namespace CHILL_WebApp.Controllers
                           Problem("Entity set 'ApplicationDbContext.Photos'  is null.");*/
 
             var image = _context.Photos.FirstOrDefault(i => !i.IsLabeled);
+
+            var labels = await _context.Labels.ToListAsync();
+            ViewData["Labels"] = labels;
             return View(image);
         }
 
