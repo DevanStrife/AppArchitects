@@ -2,6 +2,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,7 @@
             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button class="logout-button" type="submit">Logout</button>
             </form>
+
         </div>
     </header>
     <div>

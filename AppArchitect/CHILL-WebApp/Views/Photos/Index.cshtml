@@ -1,0 +1,77 @@
+﻿@model Photo
+
+@* @{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+ *@
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Path)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsLabeled)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Path)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsLabeled)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/css/Swiper.css">
+</head>
+<body>
+    <div class="display-grid">
+        <div class="image-display column">
+            <div id="canvas-container">
+                <img src="~/img/@Model.Path" id="img" style="max-width: 100%; min-width: 573px; max-height: 100%; min-height: 573px" /> <!-- Image that we want to draw on and get coordinates -->
+                <canvas id="myCanvas" width="573" height="573" ></canvas>
+                <script src="~/js/ImageHandler.js"></script>
+            </div>
+        </div>
+        <div class="label-column column">
+            <div class="column-button-wrapper">
+                <div class="all-labels">
+                    <p> LIST OF LABELS HERE</p>
+                    @foreach (var label in (List<Label>)ViewData["Labels"])
+                    {
+                        <button class="column-button">@label.Description</button>
+                    }
+                </div>
+                <form class="label-form" method="post" action="/Photos/LabelImage">
+                        <input type="text" placeholder="Welk label wilt u toevoegen?">
+                        <input type="submit" value="Add">
+                    <input type="hidden" name="ïmageId" value="@Model.Id" />
+                </form>
+            </div>
+            <button class="confirm-btn">Bevestig</button>
+
+        </div>
+    </div>
+</body>
+</html>
