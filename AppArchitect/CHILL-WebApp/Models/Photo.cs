@@ -12,5 +12,7 @@ namespace CHILL_WebApp.Models
         public bool IsLabeled { get; set; }
         public ICollection<Coordinate>? Coordinates { get; set; }
         public ICollection<Expert>? Experts { get; set; }
+        public Label? Labels { get; set; }
+        public int? LabelId { get; set; }
     }
 }
