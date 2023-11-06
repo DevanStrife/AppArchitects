@@ -9,5 +9,6 @@ namespace CHILL_WebApp.Models
         public string? Description { get; set; }
         public string? Colour { get; set; }
         public Expert? Experts { get; set; }
+        public ICollection<Photo>? Photos { get; set; }
     }
 }

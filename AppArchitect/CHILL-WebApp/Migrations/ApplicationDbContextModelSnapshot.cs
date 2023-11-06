@@ -118,11 +118,16 @@ namespace CHILL_WebApp.Migrations
                     b.Property<bool>("IsLabeled")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("LabelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LabelId");
 
                     b.ToTable("Photos");
                 });
@@ -162,6 +167,15 @@ namespace CHILL_WebApp.Migrations
                     b.Navigation("Experts");
                 });
 
+            modelBuilder.Entity("CHILL_WebApp.Models.Photo", b =>
+                {
+                    b.HasOne("CHILL_WebApp.Models.Label", "Labels")
+                        .WithMany("Photos")
+                        .HasForeignKey("LabelId");
+
+                    b.Navigation("Labels");
+                });
+
             modelBuilder.Entity("ExpertPhoto", b =>
                 {
                     b.HasOne("CHILL_WebApp.Models.Expert", null)
@@ -175,6 +189,11 @@ namespace CHILL_WebApp.Migrations
                         .HasForeignKey("PhotosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CHILL_WebApp.Models.Label", b =>
+                {
+                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("CHILL_WebApp.Models.Photo", b =>
