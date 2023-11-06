@@ -1,6 +1,9 @@
 using CHILL_WebApp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CHILL_WebApp.Controllers
 {
@@ -13,9 +16,19 @@ namespace CHILL_WebApp.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity == null)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
+            if (User.Identity.IsAuthenticated)
+            {
+                // User is logged in
+                return View();
+            }
+            return Redirect("/Identity/Account/Login");
         }
 
         public IActionResult Privacy()
@@ -42,5 +55,7 @@ namespace CHILL_WebApp.Controllers
         {
             return View();
         }
+
+
     }
 }
