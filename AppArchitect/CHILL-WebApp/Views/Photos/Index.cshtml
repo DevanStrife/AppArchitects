@@ -57,17 +57,11 @@
         <div class="label-column column">
             <div class="column-button-wrapper">
                 <div class="all-labels">
-                    <p> LIST OF LABELS HERE</p>
                     @foreach (var label in (List<Label>)ViewData["Labels"])
                     {
                         <button class="column-button">@label.Description</button>
                     }
                 </div>
-                <form class="label-form" method="post" action="/Photos/LabelImage">
-                        <input type="text" placeholder="Welk label wilt u toevoegen?">
-                        <input type="submit" value="Add">
-                    <input type="hidden" name="ïmageId" value="@Model.Id" />
-                </form>
             </div>
             <button class="confirm-btn">Bevestig</button>
 

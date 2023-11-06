@@ -21,6 +21,7 @@ html{
     list-style: none;
     padding-inline-start: 0;
     font-family:'Verdana';
+    color: var(--color-2);
 }
 
 ul{
