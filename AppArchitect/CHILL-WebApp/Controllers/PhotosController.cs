@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CHILL_WebApp.Data;
@@ -13,10 +14,12 @@ namespace CHILL_WebApp.Controllers
     public class PhotosController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public PhotosController(ApplicationDbContext context)
+        public PhotosController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Photos
@@ -230,8 +233,10 @@ namespace CHILL_WebApp.Controllers
             return View("Index", nextUnlabeledImage);
         }
 
+        // ERROR: FAILS TO CONNECT TO DB
+
         [HttpPost]
-        public IActionResult ImageDbUpdate(int imageId)
+        public async Task<IActionResult> ImageDbUpdate(int imageId)
         {
             // Get the selected label ID from the form
             int selectedLabelId = int.Parse(Request.Form["selectedLabelId"]);
@@ -245,6 +250,11 @@ namespace CHILL_WebApp.Controllers
             float y3 = float.Parse(Request.Form["y3"]);
             float x4 = float.Parse(Request.Form["x4"]);
             float y4 = float.Parse(Request.Form["y4"]);
+
+            // Get the expert (you'll need to implement user authentication and retrieve the expert based on the logged-in user)
+            var user = await _userManager.GetUserAsync(User);
+            int userId = Convert.ToInt32(user.Id);
+            Expert expert = _context.Experts.FirstOrDefault(e => e.Id == userId);
 
             // Assuming you have a database context named _context
             using (var transaction = _context.Database.BeginTransaction())
@@ -266,7 +276,7 @@ namespace CHILL_WebApp.Controllers
                     };
 
                     // Add the coordinate to the database
-                    _context.Coordinate.Add(coordinate);
+                    _context.Coordinates.Add(coordinate);
                     _context.SaveChanges();
 
                     // Get the photo
@@ -279,12 +289,12 @@ namespace CHILL_WebApp.Controllers
                         // Associate the selected label with the photo
                         photo.LabelId = selectedLabelId;
 
+                        // Associate the expert with the photo
+                        photo.Experts.Add(expert); // Assuming 'Experts' is a collection of experts in the 'Photo' entity
+
                         // Update the photo in the database
                         _context.Photos.Update(photo);
                         _context.SaveChanges();
-
-                        // You can also associate the expert (user) with the photo here
-                        // ...
 
                         // Commit the transaction
                         transaction.Commit();
