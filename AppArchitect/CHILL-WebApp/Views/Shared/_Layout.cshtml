@@ -1,6 +1,8 @@
-@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,36 +13,29 @@
     <link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />
     @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" /> *@
 </head>
+
+
+
 <body>
     <header>
         <div class="complete-header">
             <nav>
-                <partial name="_LoginPartial" />
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <ul>
-                        <li>
-                            <a asp-area="" asp-controller="Photos" asp-action="Index">Photos</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="Home" asp-action="Privacy">Overzicht</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="Labels" asp-action="Index">Labels</a>
-                        </li>
-                        <li>
-                            <a asp-area="" asp-controller="Photos" asp-action="Create">Add Photo</a>
-                        </li>
-                    </ul>
-                }
-                else
-                {
-                    <ul>
-                        ACCESS DENIED
-                    </ul>
-                }
-            </nav>
-            <button class="logout-button">Logout</button>
+                <ul>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Swiper</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Overzicht</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Labels">Labels</a>
+                    </li>
+                </ul>
+             </nav>
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button class="logout-button" type="submit">Logout</button>
+            </form>
+
         </div>
     </header>
     <div>
