@@ -1,3 +1,7 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +12,13 @@
     <link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />
     @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" /> *@
 </head>
+
+
+
 <body>
     <header>
         <div class="complete-header">
             <nav>
-                <partial name="_LoginPartial" />
                 <ul>
                     <li>
                         <a asp-area="" asp-controller="Home" asp-action="Index">Swiper</a>
@@ -25,7 +31,9 @@
                     </li>
                 </ul>
              </nav>
-            <button class="logout-button">Logout</button>
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button class="logout-button" type="submit">Logout</button>
+            </form>
         </div>
     </header>
     <div>
