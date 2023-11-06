@@ -99,14 +99,14 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("selectedLabelId").value = labelId;
 
             // Get and set the coordinates for the selected label
-            document.getElementById("x1-" + labelId).value = startX; // Set the correct values
-            document.getElementById("y1-" + labelId).value = startY; // Set the correct values
-            document.getElementById("x2-" + labelId).value = endX;   // Set the correct values
-            document.getElementById("y2-" + labelId).value = startY; // Set the correct values
-            document.getElementById("x3-" + labelId).value = startX; // Set the correct values
-            document.getElementById("y3-" + labelId).value = endY;   // Set the correct values
-            document.getElementById("x4-" + labelId).value = endX;   // Set the correct values
-            document.getElementById("y4-" + labelId).value = endY;   // Set the correct values
+            /*document.getElementById("x1").value = startX; // Set the correct values
+            document.getElementById("y1").value = startY; // Set the correct values
+            document.getElementById("x2").value = endX;   // Set the correct values
+            document.getElementById("y2").value = startY; // Set the correct values
+            document.getElementById("x3").value = startX; // Set the correct values
+            document.getElementById("y3").value = endY;   // Set the correct values
+            document.getElementById("x4").value = endX;   // Set the correct values
+            document.getElementById("y4").value = endY;   // Set the correct values*/
         });
     });
 
@@ -117,29 +117,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const imageId = document.getElementById("imageId").value;
 
-        // Send the data to the server using an AJAX request
+        // Create a new FormData object to send the data as form data
+        const formData = new FormData();
+        formData.append("imageId", imageId);
+        formData.append("x1", document.getElementById("x1").value);
+        formData.append("y1", document.getElementById("y1").value);
+        formData.append("x2", document.getElementById("x2").value);
+        formData.append("y2", document.getElementById("y2").value);
+        formData.append("x3", document.getElementById("x3").value);
+        formData.append("y3", document.getElementById("y3").value);
+        formData.append("x4", document.getElementById("x4").value);
+        formData.append("y4", document.getElementById("y4").value);
+
+        // Send the data to the server using an AJAX request with the correct content type
         fetch("/Photos/ImageDbUpdate", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                imageId,
-            }),
+            body: formData,  // Use the FormData object
         })
             .then(function (response) {
                 // Handle the response from the server
                 if (response.ok) {
                     // Handle success
-                    alert("Labeling completed successfully."); // You can show a success message to the user
+                    alert("Labeling completed successfully.");
                 } else {
                     // Handle error
-                    alert("Labeling failed. Please try again."); // You can show an error message to the user
+                    alert("Labeling failed. Please try again.");
                 }
             })
             .catch(function (error) {
                 console.error("Error:", error);
-                alert("An error occurred. Please try again."); // Handle any other unexpected errors
+                alert("An error occurred. Please try again.");
             });
     });
 });

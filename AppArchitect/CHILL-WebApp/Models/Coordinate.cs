@@ -9,21 +9,21 @@ namespace CHILL_WebApp.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public float X1 { get; set; }
+        public string X1 { get; set; }
         [Required]
-        public float Y1 { get; set; }
+        public string Y1 { get; set; }
         [Required]
-        public float X2 { get; set; }
+        public string X2 { get; set; }
         [Required]
-        public float Y2 { get; set; }
+        public string Y2 { get; set; }
         [Required]
-        public float X3 { get; set; }
+        public string X3 { get; set; }
         [Required]
-        public float Y3 { get; set; }
+        public string Y3 { get; set; }
         [Required]
-        public float X4 { get; set; }
+        public string X4 { get; set; }
         [Required]
-        public float Y4 { get; set; }
+        public string Y4 { get; set; }
 
         public  Photo? Photos { get; set; }
         public int PhotoId { get; set; }

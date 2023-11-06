@@ -203,14 +203,14 @@ namespace CHILL_WebApp.Controllers
                 // Create a new Coordinate record
                 Coordinate coordinate = new Coordinate
                 {
-                    X1 = x1,
-                    Y1 = y2,
-                    X2 = x2,
-                    Y2 = y2,
-                    X3 = x3,
-                    Y3 = y3,
-                    X4 = x4,
-                    Y4 = y4,
+                    X1 = Convert.ToString(x1),
+                    Y1 = Convert.ToString(y2),
+                    X2 = Convert.ToString(x2),
+                    Y2 = Convert.ToString(y2),
+                    X3 = Convert.ToString(x3),
+                    Y3 = Convert.ToString(y3),
+                    X4 = Convert.ToString(x4),
+                    Y4 = Convert.ToString(y4),
                     Photos = photo
                 };
 
@@ -239,7 +239,7 @@ namespace CHILL_WebApp.Controllers
         public async Task<IActionResult> ImageDbUpdate(int imageId)
         {
             // Get the selected label ID from the form
-            int selectedLabelId = int.Parse(Request.Form["selectedLabelId"]);
+            int selectedLabelId = Convert.ToInt32(Request.Form["selectedLabelId"]);
 
             // Get the coordinates
             float x1 = float.Parse(Request.Form["x1"]);
@@ -251,7 +251,7 @@ namespace CHILL_WebApp.Controllers
             float x4 = float.Parse(Request.Form["x4"]);
             float y4 = float.Parse(Request.Form["y4"]);
 
-            // Get the expert (you'll need to implement user authentication and retrieve the expert based on the logged-in user)
+            // Get the expert (you'll need to implement user authentication and retrieve the expert based on the logged-in user) ERROR: USER ID IS SOME STRING OF LETTERS
             var user = await _userManager.GetUserAsync(User);
             int userId = Convert.ToInt32(user.Id);
             Expert expert = _context.Experts.FirstOrDefault(e => e.Id == userId);
@@ -264,14 +264,14 @@ namespace CHILL_WebApp.Controllers
                     // Create a new Coordinate record
                     Coordinate coordinate = new Coordinate
                     {
-                        X1 = x1,
-                        Y1 = y1,
-                        X2 = x2,
-                        Y2 = y2,
-                        X3 = x3,
-                        Y3 = y3,
-                        X4 = x4,
-                        Y4 = y4,
+                        X1 = Convert.ToString(x1),
+                        Y1 = Convert.ToString(y1),
+                        X2 = Convert.ToString(x2),
+                        Y2 = Convert.ToString(y2),
+                        X3 = Convert.ToString(x3),
+                        Y3 = Convert.ToString(y3),
+                        X4 = Convert.ToString(x4),
+                        Y4 = Convert.ToString(y4),
                         PhotoId = imageId
                     };
 
