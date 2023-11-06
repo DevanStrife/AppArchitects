@@ -24,7 +24,7 @@ public class IdentityDbContext : IdentityDbContext<IdentityUser>
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=.;Database=CHILLDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("Server=DS-Asus-Laptop\\SQLEXPRESS;Database=AppArchitectsV5;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
         base.OnConfiguring(optionsBuilder);
     }
 }
