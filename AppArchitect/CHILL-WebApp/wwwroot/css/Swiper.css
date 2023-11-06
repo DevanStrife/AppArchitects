@@ -32,12 +32,12 @@ body{
     margin-top: 5vh;
 }
 
-.column-button-wrapper{
+.column-button-wrapper {
     background-color: var(--color-8);
-    height: 63vh;
+    max-height: 63vh; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling when content overflows */
     margin-right: 18vw;
     padding: 1vh 2vh 0vh 2vh;
-    overflow: auto;
     position: relative;
 }
 
@@ -66,11 +66,8 @@ body{
     height: 8vh;
 }
 
-.column-button-wrapper form{
-    position: absolute;
-    bottom: 2vh;
-    left: 2vh;
-    margin-top: 1vh;
+.column-button-wrapper form {
+    margin-top: 1vh; /* Adjust spacing between forms */
 }
 
 input[type=text]{

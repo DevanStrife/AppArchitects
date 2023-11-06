@@ -72,5 +72,49 @@ function getRectangleCoordinates() {
     document.getElementById("y3").value = roundedBottomLeft.y;
     document.getElementById("x4").value = roundedBottomRight.x;
     document.getElementById("y4").value = roundedBottomRight.y;
-
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const labelButtons = document.querySelectorAll(".column-button");
+
+    labelButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            // Get the label ID from the data-label-id attribute
+            const labelId = button.getAttribute("data-label-id");
+
+            // Set the selectedLabelId input field
+            document.getElementById("selectedLabelId").value = labelId;
+        });
+    });
+
+    // Handle the "Bevestig" button click
+    const confirmButton = document.querySelector(".confirm-btn");
+    confirmButton.addEventListener("click", function () {
+        const imageId = document.getElementById("imageId").value;
+
+        // Send the data to the server using an AJAX request
+        fetch("/Photos/ImageDbUpdate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                imageId,
+            }),
+        })
+            .then(function (response) {
+                // Handle the response from the server
+                if (response.ok) {
+                    // Handle success
+                    alert("Labeling completed successfully."); // You can show a success message to the user
+                } else {
+                    // Handle error
+                    alert("Labeling failed. Please try again."); // You can show an error message to the user
+                }
+            })
+            .catch(function (error) {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again."); // Handle any other unexpected errors
+            });
+    });
+    });
+});

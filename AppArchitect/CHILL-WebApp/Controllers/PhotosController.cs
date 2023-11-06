@@ -185,7 +185,7 @@ namespace CHILL_WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult LabelImage(int imageId, int labelId, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+        public IActionResult ImageDbUpdateOutdated(int imageId, int labelId, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
         {
             // Get the expert (you need to implement authentication)
             Expert expert = _context.Experts.FirstOrDefault(/* Find the expert based on user identity */);
@@ -217,7 +217,7 @@ namespace CHILL_WebApp.Controllers
                 if (label != null)
                 {
                     // Associate the label and expert with the photo
-                    photo.Label = label; // !!! DB connections are fucked
+                    photo.Labels = label; // !!! DB connections are fucked
                     photo.Experts.Add(expert);
 
                     _context.SaveChanges();
@@ -228,6 +228,78 @@ namespace CHILL_WebApp.Controllers
             var nextUnlabeledImage = _context.Photos.FirstOrDefault(i => !i.IsLabeled);
 
             return View("Index", nextUnlabeledImage);
+        }
+
+        [HttpPost]
+        public IActionResult ImageDbUpdate(int imageId)
+        {
+            // Get the selected label ID from the form
+            int selectedLabelId = int.Parse(Request.Form["selectedLabelId"]);
+
+            // Get the coordinates
+            float x1 = float.Parse(Request.Form["x1"]);
+            float y1 = float.Parse(Request.Form["y1"]);
+            float x2 = float.Parse(Request.Form["x2"]);
+            float y2 = float.Parse(Request.Form["y2"]);
+            float x3 = float.Parse(Request.Form["x3"]);
+            float y3 = float.Parse(Request.Form["y3"]);
+            float x4 = float.Parse(Request.Form["x4"]);
+            float y4 = float.Parse(Request.Form["y4"]);
+
+            // Assuming you have a database context named _context
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    // Create a new Coordinate record
+                    Coordinate coordinate = new Coordinate
+                    {
+                        X1 = x1,
+                        Y1 = y1,
+                        X2 = x2,
+                        Y2 = y2,
+                        X3 = x3,
+                        Y3 = y3,
+                        X4 = x4,
+                        Y4 = y4,
+                        PhotoId = imageId
+                    };
+
+                    // Add the coordinate to the database
+                    _context.Coordinate.Add(coordinate);
+                    _context.SaveChanges();
+
+                    // Get the photo
+                    Photo photo = _context.Photos.FirstOrDefault(p => p.Id == imageId);
+                    if (photo != null)
+                    {
+                        // Set IsLabeled to true
+                        photo.IsLabeled = true;
+
+                        // Associate the selected label with the photo
+                        photo.LabelId = selectedLabelId;
+
+                        // Update the photo in the database
+                        _context.Photos.Update(photo);
+                        _context.SaveChanges();
+
+                        // You can also associate the expert (user) with the photo here
+                        // ...
+
+                        // Commit the transaction
+                        transaction.Commit();
+                    }
+
+                    // Handle success
+                    return Ok("Labeling completed successfully");
+                }
+                catch (Exception ex)
+                {
+                    // Handle any errors, and roll back the transaction if needed
+                    transaction.Rollback();
+                    return BadRequest("Labeling failed: " + ex.Message);
+                }
+            }
         }
     }
 }

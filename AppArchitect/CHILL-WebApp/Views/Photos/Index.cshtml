@@ -59,8 +59,9 @@
                 <div class="all-labels">
                     @foreach (var label in (List<Label>)ViewData["Labels"])
                     {
-                        <form method="post" action="/Photos/LabelImage">
-                            <input type="hidden" name="imageId" value="@Model.Id" />
+                        <form method="post">
+                            <button class="column-button" data-label-id="@label.Id">@label.Description</button>
+                            @* <input type="hidden" name="imageId" value="@Model.Id" />
                             <input type="hidden" name="labelId" value="@label.Id" />
                             <input type="hidden" name="x1" id="x1" />
                             <input type="hidden" name="y1" id="y1" />
@@ -69,8 +70,7 @@
                             <input type="hidden" name="x3" id="x3" />
                             <input type="hidden" name="y3" id="y3" />
                             <input type="hidden" name="x4" id="x4" />
-                            <input type="hidden" name="y4" id="y4" />
-                            <button class="column-button">@label.Description</button>
+                            <input type="hidden" name="y4" id="y4" /> *@
                         </form>
                     }
                 </div>
@@ -80,7 +80,9 @@
                     <input type="hidden" name="ïmageId" value="@Model.Id" />
                 </form> *@
             </div>
-            <form method="post" action="/Photos/LabelImage">
+            <form method="post" action="/Photos/ImageDbUpdate">
+                <input type="hidden" name="imageId" id="imageId" value="@Model.Id" />
+                <input type="hidden" name="selectedLabelId" id="selectedLabelId" />
                 <button class="confirm-btn">Bevestig</button>
             </form>
 
