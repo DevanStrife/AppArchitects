@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault(); // Prevent form submission
 
         const imageId = document.getElementById("imageId").value;
+        const labelId = document.getElementById("selectedLabelId").value; // Get the labelId
 
         // Create a new FormData object to send the data as form data
         const formData = new FormData();
@@ -128,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("y3", document.getElementById("y3").value);
         formData.append("x4", document.getElementById("x4").value);
         formData.append("y4", document.getElementById("y4").value);
+        formData.append("labelId", labelId);
 
         // Send the data to the server using an AJAX request with the correct content type
         fetch("/Photos/ImageDbUpdate", {
@@ -138,7 +140,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Handle the response from the server
                 if (response.ok) {
                     // Handle success
-                    alert("Labeling completed successfully.");
+                    alert("Labeling completed successfully! Loading next image.");
+                    window.location.reload();
                 } else {
                     // Handle error
                     alert("Labeling failed. Please try again.");

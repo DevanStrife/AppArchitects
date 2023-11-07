@@ -235,26 +235,26 @@ namespace CHILL_WebApp.Controllers
 
         // ERROR: FAILS TO CONNECT TO DB
 
-        [HttpPost]
+        [HttpPost("/Photos/ImageDbUpdate")]
         public async Task<IActionResult> ImageDbUpdate(int imageId)
         {
             // Get the selected label ID from the form
-            int selectedLabelId = Convert.ToInt32(Request.Form["selectedLabelId"]);
+            int selectedLabelId = Convert.ToInt32(Request.Form["labelId"]);
 
             // Get the coordinates
-            float x1 = float.Parse(Request.Form["x1"]);
-            float y1 = float.Parse(Request.Form["y1"]);
-            float x2 = float.Parse(Request.Form["x2"]);
-            float y2 = float.Parse(Request.Form["y2"]);
-            float x3 = float.Parse(Request.Form["x3"]);
-            float y3 = float.Parse(Request.Form["y3"]);
-            float x4 = float.Parse(Request.Form["x4"]);
-            float y4 = float.Parse(Request.Form["y4"]);
+            string x1 = Request.Form["x1"];
+            string y1 = Request.Form["y1"];
+            string x2 = Request.Form["x2"];
+            string y2 = Request.Form["y2"];
+            string x3 = Request.Form["x3"];
+            string y3 = Request.Form["y3"];
+            string x4 = Request.Form["x4"];
+            string y4 = Request.Form["y4"];
 
             // Get the expert (you'll need to implement user authentication and retrieve the expert based on the logged-in user) ERROR: USER ID IS SOME STRING OF LETTERS
-            var user = await _userManager.GetUserAsync(User);
+            /*var user = await _userManager.GetUserAsync(User);
             int userId = Convert.ToInt32(user.Id);
-            Expert expert = _context.Experts.FirstOrDefault(e => e.Id == userId);
+            Expert expert = _context.Experts.FirstOrDefault(e => e.Id == userId);*/
 
             // Assuming you have a database context named _context
             using (var transaction = _context.Database.BeginTransaction())
@@ -264,14 +264,14 @@ namespace CHILL_WebApp.Controllers
                     // Create a new Coordinate record
                     Coordinate coordinate = new Coordinate
                     {
-                        X1 = Convert.ToString(x1),
-                        Y1 = Convert.ToString(y1),
-                        X2 = Convert.ToString(x2),
-                        Y2 = Convert.ToString(y2),
-                        X3 = Convert.ToString(x3),
-                        Y3 = Convert.ToString(y3),
-                        X4 = Convert.ToString(x4),
-                        Y4 = Convert.ToString(y4),
+                        X1 = x1,
+                        Y1 = y1,
+                        X2 = x2,
+                        Y2 = y2,
+                        X3 = x3,
+                        Y3 = y3,
+                        X4 = x4,
+                        Y4 = y4,
                         PhotoId = imageId
                     };
 
@@ -290,7 +290,7 @@ namespace CHILL_WebApp.Controllers
                         photo.LabelId = selectedLabelId;
 
                         // Associate the expert with the photo
-                        photo.Experts.Add(expert); // Assuming 'Experts' is a collection of experts in the 'Photo' entity
+                        /*photo.Experts.Add(expert);*/ // Assuming 'Experts' is a collection of experts in the 'Photo' entity
 
                         // Update the photo in the database
                         _context.Photos.Update(photo);
