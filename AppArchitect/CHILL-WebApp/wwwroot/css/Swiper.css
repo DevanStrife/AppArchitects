@@ -39,12 +39,13 @@ body{
     margin-right: 18vw;
     padding: 1vh 2vh 0vh 2vh;
     position: relative;
+    width: 20vw;
 }
 
 .column-button{
     color: var(--color-2);
     padding: 2vh;
-    width: 20vw;
+    width: 19vw;
     border: 1px solid var(--color-2);
     background-color: inherit;
     margin-top: 1vh;

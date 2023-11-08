@@ -4,38 +4,64 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/Shared.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Labels.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Colour)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Colour)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<body>
+    <p>
+        <a asp-action="Create" id="AddLabel">Add new label</a>
+    </p>
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <span class="edit-field" data-field="Description" data-id="@item.Id">
+                        <span class="data-text">@item.Description</span>
+                        <input type="text" class="input-field" value="@item.Description" />
+                    </span>
+                </td>
+                <td>
+                    <span class="edit-field" data-field="Colour" data-id="@item.Id">
+                        <span class="data-text">@item.Colour</span>
+                        <input type="text" class="input-field" value="@item.Colour" />
+                    </span>
+                </td>
+                <td>
+                    <button class="edit-button" data-id="@item.Id">Edit</button>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            $(".input-field").hide();
+
+            $(".edit-button").click(function () {
+                var itemId = $(this).data("id");
+                var parentRow = $(this).closest("tr");
+                parentRow.find(".data-text, .input-field").toggle();
+                $(this).text("Confirm");
+                $(this).removeClass("edit-button").addClass("confirm-button");
+            });
+
+            $(".confirm-button").click(function () {
+                var itemId = $(this).data("id");
+                var parentRow = $(this).closest("tr");
+                parentRow.find(".data-text, .input-field").toggle();
+                $(this).text("Edit");
+                $(this).removeClass("confirm-button").addClass("edit-button");
+                parentRow.find(".data-text").each(function () {
+                    var fieldName = $(this).closest(".edit-field").data("field");
+                    var inputField = parentRow.find(".input-field[name='" + fieldName + "']");
+                    $(this).text(inputField.val());
+                });
+            });
+        });
+    </script>
+</body>
