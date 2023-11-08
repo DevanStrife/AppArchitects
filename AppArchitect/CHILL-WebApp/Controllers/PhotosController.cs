@@ -37,23 +37,12 @@ namespace CHILL_WebApp.Controllers
         }
 
         // GET: Photos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null || _context.Photos == null)
-            {
-                return NotFound();
-            }
+            var images = _context.Photos.ToList();
 
-            var photo = await _context.Photos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (photo == null)
-            {
-                return NotFound();
-            }
-
-            return View(photo);
+            return View(images);
         }
-
         // GET: Photos/Create
         public IActionResult Create()
         {

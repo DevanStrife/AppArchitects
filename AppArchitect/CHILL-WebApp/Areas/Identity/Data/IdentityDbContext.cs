@@ -25,7 +25,7 @@ public class IdentityDbContext : IdentityDbContext<IdentityUser>
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = AppArchitectsV5; TrustServerCertificate = True; Trusted_Connection = True; ");
+        optionsBuilder.UseSqlServer("Server=DS-Asus-Laptop\\SQLEXPRESS;Database=AppArchitectsV5;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
         base.OnConfiguring(optionsBuilder);
     }
 }

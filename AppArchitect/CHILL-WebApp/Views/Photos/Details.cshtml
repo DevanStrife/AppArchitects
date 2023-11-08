@@ -1,30 +1,31 @@
-﻿@model CHILL_WebApp.Models.Photo
-
+﻿@model List<CHILL_WebApp.Models.Photo>
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Overzicht";
 }
 
-<h1>Details</h1>
+<h1>Overzicht</h1>
 
-<div>
-    <h4>Photo</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Path)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Path)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsLabeled)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsLabeled)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/css/Overview.css"> <!-- Adjust the path to your CSS file as needed -->
+</head>
+<body>
+    <div class="image-grid">
+        @foreach (var image in Model)
+        {
+            <div class="rated-pictures">
+                <div class="rated-picture">
+                    <div class="img-container">
+                        <img src="~/img/@image.Path" id="images" style="max-width: 100%; min-width: 200px; max-height: 100%; min-height: 200px">
+                    </div>
+                    <h5>Labeled?: @image.IsLabeled</h5>
+                    @* <div class="button-wrapper">
+                        <button>Label status</button>
+                    </div> *@
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
