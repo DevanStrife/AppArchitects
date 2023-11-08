@@ -4,6 +4,7 @@ using CHILL_WebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CHILL_WebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231106132323_CoordinateFix")]
+    partial class CoordinateFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,37 +36,29 @@ namespace CHILL_WebApp.Migrations
                     b.Property<int>("PhotoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("X1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("X1")
+                        .HasColumnType("real");
 
-                    b.Property<string>("X2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("X2")
+                        .HasColumnType("real");
 
-                    b.Property<string>("X3")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("X3")
+                        .HasColumnType("real");
 
-                    b.Property<string>("X4")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("X4")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Y1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("Y1")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Y2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("Y2")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Y3")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("Y3")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Y4")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("Y4")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

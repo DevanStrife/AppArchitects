@@ -8,6 +8,7 @@ namespace CHILL_WebApp.Data
         public DbSet<Photo>? Photos { get; set; }
         public DbSet<Label>? Labels { get; set; }
         public DbSet<Expert>? Experts { get; set; }
+        public DbSet<Coordinate>? Coordinates { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

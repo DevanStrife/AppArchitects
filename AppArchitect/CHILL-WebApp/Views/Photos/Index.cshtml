@@ -57,13 +57,45 @@
         <div class="label-column column">
             <div class="column-button-wrapper">
                 <div class="all-labels">
+                    @{int labelId = 1; }
+
                     @foreach (var label in (List<Label>)ViewData["Labels"])
                     {
-                        <button class="column-button">@label.Description</button>
+                        <form method="post">
+                            <button class="column-button" data-label-id="@label.Id" onclick="setLabelId(this)">@label.Description</button>
+                            <input type="hidden" name="imageId" value="@Model.Id" />
+                            <input type="hidden" name="labelId" value="@label.Id" />
+                            <input type="hidden" name="x1" id="x1" value="0"/>
+                            <input type="hidden" name="y1" id="y1" value="0" />
+                            <input type="hidden" name="x2" id="x2" value="0" />
+                            <input type="hidden" name="y2" id="y2" value="0" />
+                            <input type="hidden" name="x3" id="x3" value="0" />
+                            <input type="hidden" name="y3" id="y3" value="0" />
+                            <input type="hidden" name="x4" id="x4" value="0" />
+                            <input type="hidden" name="y4" id="y4" value="0" />
+                        </form>
                     }
+                    @* Sets the local labelId var to the user selected label *@
+                    <script type="text/javascript">
+                        function setLabelId(button) {
+                            var labelIdInput = button.nextElementSibling.querySelector('input[name="labelId"]');
+                            if (labelIdInput) {
+                                labelId = parseInt(labelIdInput.value);
+                            }
+                        }
+                    </script>
                 </div>
+                @* <form class="label-form" method="post" action="/Photos/LabelImage">
+                        <input type="text" placeholder="Welk label wilt u toevoegen?">
+                        <input type="submit" value="Add">
+                    <input type="hidden" name="ïmageId" value="@Model.Id" />
+                </form> *@
             </div>
-            <button class="confirm-btn">Bevestig</button>
+            <form method="post" action="/Photos/ImageDbUpdate">
+                <input type="hidden" name="imageId" id="imageId" value="@Model.Id" />
+                <input type="hidden" name="selectedLabelId" id="selectedLabelId" value="@labelId" />
+                <button class="confirm-btn">Bevestig</button>
+            </form>
 
         </div>
     </div>
