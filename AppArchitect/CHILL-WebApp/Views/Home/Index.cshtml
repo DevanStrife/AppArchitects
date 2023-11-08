@@ -13,18 +13,19 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
  *@
-
-
-
-
-
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="~/css/Swiper.css">
 </head>
 <body>
-    <p>Log in to view the AI images</p>
+    @if (User?.Identity.IsAuthenticated == false)
+    {
+        <p>Log in to view the AI images</p>
+    }
+    else
+    {
+        <p>Welcome</p>
+    }
 </body>
 </html>
