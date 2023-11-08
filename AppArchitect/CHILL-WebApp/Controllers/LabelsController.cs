@@ -159,5 +159,26 @@ namespace CHILL_WebApp.Controllers
         {
           return (_context.Labels?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        /*[HttpPost]
+        public async Task<IActionResult> UpdateLabels(IEnumerable<Label> labels)
+        {
+            if (ModelState.IsValid)
+            {
+                // Update the labels in the database
+                foreach (var label in labels)
+                {
+                    _context.Entry(label).State = EntityState.Modified;
+                }
+
+                await _context.SaveChangesAsync();
+
+                // Return a success response as JSON
+                return Json(new { success = true });
+            }
+
+            // Return a failure response as JSON, optionally with error messages
+            return Json(new { success = false, errors = ModelState.Values.SelectMany(v => v.Errors) });
+        }*/
     }
 }
