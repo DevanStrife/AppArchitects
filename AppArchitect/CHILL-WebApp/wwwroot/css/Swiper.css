@@ -1,0 +1,97 @@
+:root {
+    --color-1: #FAFAFA;
+    --color-2: #F5F5F5;
+    --color-3: #EEEEEE;
+    --color-4: #BDBDBD;
+    --color-5: #9E9E9E;
+    --color-5: #757575;
+    --color-6: #616161;
+    --color-7: #282828;
+    --color-8: #212121;
+    --color-9: #40E0D0;
+}
+
+body{
+}
+
+.display-grid{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-gap: 3vw;
+}
+
+.image-display{
+    margin-left: 18vw;
+}
+
+.image-display img{
+    height: 75vh;
+}
+
+.column{
+    margin-top: 5vh;
+}
+
+.column-button-wrapper {
+    background-color: var(--color-8);
+    max-height: 63vh; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling when content overflows */
+    margin-right: 18vw;
+    padding: 1vh 2vh 0vh 2vh;
+    position: relative;
+    width: 20vw;
+}
+
+.column-button{
+    color: var(--color-2);
+    padding: 2vh;
+    width: 19vw;
+    border: 1px solid var(--color-2);
+    background-color: inherit;
+    margin-top: 1vh;
+}
+
+    .column-button:hover, .confirm-btn:hover, .column-button.active, input[type=submit]:hover{
+        background-color: var(--color-7);
+        color: var(--color-9);
+        cursor: pointer;
+    }
+
+.confirm-btn {
+    color: var(--color-2);
+    border: 1px solid var(--color-2);
+    background-color: var(--color-8);
+    margin-top: 3vh;
+    margin-right: 20vh;
+    width: 22vw;
+    height: 8vh;
+}
+
+.column-button-wrapper form {
+    margin-top: 1vh; /* Adjust spacing between forms */
+}
+
+input[type=text]{
+    text-indent: 1vh;
+    width: 16.5vw;
+    height: 4.5vh;
+}
+
+input[type=submit] {
+    color: var(--color-2);
+    background-color: var(--color-7);
+    border: 1px solid var(--color-2);
+    margin-left: 1vh;
+    width: 2.5vw;
+    height: 5vh;
+}
+
+#canvas-container {
+    position: relative;
+}
+
+#myCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

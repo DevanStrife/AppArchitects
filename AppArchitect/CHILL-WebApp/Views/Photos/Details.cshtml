@@ -1,0 +1,31 @@
+﻿@model List<CHILL_WebApp.Models.Photo>
+@{
+    ViewData["Title"] = "Overzicht";
+}
+
+<h1>Overzicht</h1>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/css/Overview.css"> <!-- Adjust the path to your CSS file as needed -->
+</head>
+<body>
+    <div class="image-grid">
+        @foreach (var image in Model)
+        {
+            <div class="rated-pictures">
+                <div class="rated-picture">
+                    <div class="img-container">
+                        <img src="~/img/@image.Path" id="images" style="max-width: 100%; min-width: 200px; max-height: 100%; min-height: 200px">
+                    </div>
+                    <h5>Labeled?: @image.IsLabeled</h5>
+                    @* <div class="button-wrapper">
+                        <button>Label status</button>
+                    </div> *@
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
